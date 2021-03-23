@@ -18,6 +18,8 @@ namespace Flx.Delivery.Application.Mappings
                     opts => opts.MapFrom(src => src.Password))
                 .ForMember(dest => dest.Roles,
                     opts => opts.MapFrom(src => new RoleType[] { RoleType.User }));
+
+            CreateMap<Microservices.Queries.GetCurrentUserInformationQuery.Result, UserEntity>();
         }
     }
 }
