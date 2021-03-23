@@ -41,17 +41,11 @@ namespace Flx.Delivery.Identity.Pipelines
 
                 if (authAttribute.Roles?.Count() > 0)
                 {
-                    var user = (await _userStorage.PickViaAccessToken(_authAccessor.AccessToken!))!;
-
-                    foreach (RoleType item in authAttribute.Roles)
+                    if (await UserHasAllRoles(_authAccessor.AccessToken!, authAttribute.Roles!))
                     {
-                        if (!user.IsHasRole(item))
-                        {
-                            throw new AuthDeliveryException();
-                        }
+                        throw new AuthDeliveryException();
                     }
-
-                    return await next();
+                    else return await next();
                 }
                 else return await next();
             }
@@ -64,6 +58,21 @@ namespace Flx.Delivery.Identity.Pipelines
             {
                 throw new AuthDeliveryException();
             }
+        }
+
+        public async Task<bool> UserHasAllRoles(string token, IEnumerable<RoleType> roles)
+        {
+            var user = (await _userStorage.PickViaAccessToken(token))!;
+
+            foreach (RoleType item in roles)
+            {
+                if (!user.IsHasRole(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
