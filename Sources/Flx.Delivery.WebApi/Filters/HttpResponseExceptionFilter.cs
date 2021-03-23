@@ -11,7 +11,10 @@ namespace Flx.Delivery.WebApi.Filters
     {
         public int Order { get; } = int.MaxValue - 10;
 
-        public void OnActionExecuting(ActionExecutingContext context) { }
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
+
+        }
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
@@ -30,11 +33,12 @@ namespace Flx.Delivery.WebApi.Filters
         private IActionResult ExceptionToResult(Exception exception, int code)
         {
             var json = new Dictionary<string, dynamic>();
-            
+
             json.Add("code", code);
-            json.Add("error", exception.GetType().Name.Replace("Exception", ""));
-            json.Add("message", exception.Message);
-            json.Add("stackTrace", exception.StackTrace);
+            json.Add("isError", "true");
+            json.Add("errorType", exception.GetType().Name);
+            json.Add("errorMessage", exception.Message);
+            // json.Add("stackTrace", exception.StackTrace);
 
             var result = new JsonResult(json)
             {
