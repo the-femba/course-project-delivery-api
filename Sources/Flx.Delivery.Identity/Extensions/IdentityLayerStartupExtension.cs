@@ -4,6 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using Flx.Delivery.Application.Interfaces.Accessors;
 using Flx.Delivery.Identity.Accessors;
+using Flx.Delivery.Identity.Pipelines;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Rovecode.Lotos.Extensions;
@@ -18,12 +19,18 @@ namespace Flx.Delivery.Identity.Extensions
 
             services.AddLotos(currentAssembly);
 
-            services.InitAccessort();
+            services.InitAccessors();
+            services.InitPipelines();
         }
 
-        private static void InitAccessort(this IServiceCollection services)
+        private static void InitAccessors(this IServiceCollection services)
         {
             services.AddSingleton<IHttpAuthAccessor, HttpAuthAccessor>();
+        }
+
+        private static void InitPipelines(this IServiceCollection services)
+        {
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthPipeline<,>));
         }
     }
 }
