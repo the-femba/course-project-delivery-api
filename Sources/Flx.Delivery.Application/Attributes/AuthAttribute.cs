@@ -1,5 +1,4 @@
-﻿using Flx.Delivery.Application.Enums;
-using Flx.Delivery.Domain.Enums;
+﻿using Flx.Delivery.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

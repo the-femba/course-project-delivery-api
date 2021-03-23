@@ -1,5 +1,4 @@
 ﻿using Flx.Delivery.Application.Attributes;
-using Flx.Delivery.Application.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

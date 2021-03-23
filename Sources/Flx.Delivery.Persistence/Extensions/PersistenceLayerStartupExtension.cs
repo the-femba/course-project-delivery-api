@@ -23,7 +23,7 @@ namespace Flx.Delivery.Persistence.Extensions
 
         private static void InitRepositories(this IServiceCollection services)
         {
-            services.AddSingleton<IUserEntityRepository, UserEntityRepository>();
+            services.AddSingleton<IUserEntityStorage, UserEntityStorage>();
         }
     }
 }

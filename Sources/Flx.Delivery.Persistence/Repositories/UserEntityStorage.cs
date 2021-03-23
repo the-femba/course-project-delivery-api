@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Flx.Delivery.Persistence.Repositories
 {
-    public sealed class UserEntityRepository : Storage<UserEntity>, IUserEntityRepository
+    public sealed class UserEntityStorage : Storage<UserEntity>, IUserEntityStorage
     {
         private readonly IStorage<AccessTokenEntity> _accessTokenStorage;
 
-        public UserEntityRepository(StorageContext<UserEntity> storageContext, IStorage<AccessTokenEntity> accessTokenStorage) : base(storageContext)
+        public UserEntityStorage(StorageContext<UserEntity> storageContext, IStorage<AccessTokenEntity> accessTokenStorage) : base(storageContext)
         {
             _accessTokenStorage = accessTokenStorage;
         }

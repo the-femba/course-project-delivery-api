@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Flx.Delivery.Application.Interfaces.Repositories
 {
-    public interface IUserEntityRepository : IStorage<UserEntity>
+    public interface IUserEntityStorage : IStorage<UserEntity>
     {
         public Task<UserEntity?> PickViaAccessToken(string accessToken);
     }
