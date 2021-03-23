@@ -5,12 +5,12 @@ COPY . ./app
 
 WORKDIR /app
 RUN dotnet restore
-RUN dotnet publish -c release -o /app/Flx.ProjectName.WebApi --no-restore
+RUN dotnet publish -c release -o /app/Flx.Delivery.WebApi --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 
-WORKDIR /app/Flx.ProjectName.WebApi
+WORKDIR /app/Flx.Delivery.WebApi
 
 COPY --from=build /app/Flx.Oriole.WebApi ./
 
-ENTRYPOINT ["dotnet", "Flx.ProjectName.WebApi.dll"]
+ENTRYPOINT ["dotnet", "Flx.Delivery.WebApi.dll"]
