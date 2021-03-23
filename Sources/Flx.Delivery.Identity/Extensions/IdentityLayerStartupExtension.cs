@@ -19,13 +19,15 @@ namespace Flx.Delivery.Identity.Extensions
 
             services.AddLotos(currentAssembly);
 
+            services.AddHttpContextAccessor();
+
             services.InitAccessors();
             services.InitPipelines();
         }
 
         private static void InitAccessors(this IServiceCollection services)
         {
-            services.AddSingleton<IHttpAuthAccessor, HttpAuthAccessor>();
+            services.AddTransient<IHttpAuthAccessor, HttpAuthAccessor>();
         }
 
         private static void InitPipelines(this IServiceCollection services)
