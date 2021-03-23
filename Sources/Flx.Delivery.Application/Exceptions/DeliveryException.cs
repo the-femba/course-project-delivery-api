@@ -9,12 +9,12 @@ namespace Flx.Delivery.Application.Exceptions
     {
         public int Status { get; }
 
-        public DeliveryException(int status = 500) : base()
+        public DeliveryException(int status = 400) : base()
         {
             Status = status;
         }
 
-        public DeliveryException(string message, int status = 500) : base(message)
+        public DeliveryException(string message, int status = 400) : base(message)
         {
             Status = status;
         }

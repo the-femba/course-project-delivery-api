@@ -27,16 +27,23 @@ namespace Flx.Delivery.Identity.Accessors
 
         private string? GetAccessToken()
         {
-            string authHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+            try
+            {
+                string authHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
 
-            if (authHeader.Length <= TokenSecretWord.Length || !authHeader.StartsWith(TokenSecretWord))
+                if (authHeader.Length <= TokenSecretWord.Length || !authHeader.StartsWith(TokenSecretWord))
+                {
+                    return null;
+                }
+
+                string token = authHeader.Remove(0, TokenSecretWord.Length);
+
+                return token;
+            }
+            catch (Exception)
             {
                 return null;
             }
-
-            string token = authHeader.Remove(0, TokenSecretWord.Length);
-
-            return token;
         }
     }
 }
