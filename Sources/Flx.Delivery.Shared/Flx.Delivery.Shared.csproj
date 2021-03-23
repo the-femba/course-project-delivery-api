@@ -1,17 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
-    <ReleaseVersion>1.0.0</ReleaseVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+		<ReleaseVersion>1.0.0</ReleaseVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Flx.Delivery.Application\Flx.Delivery.Application.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Repositories\**" />
+		<Compile Remove="Services\**" />
+		<EmbeddedResource Remove="Repositories\**" />
+		<EmbeddedResource Remove="Services\**" />
+		<None Remove="Repositories\**" />
+		<None Remove="Services\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Flx.Delivery.Application\Flx.Delivery.Application.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Extensions\" />
+	</ItemGroup>
 </Project>

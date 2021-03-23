@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Flx.Delivery.Domain.Entities;
+using Flx.Delivery.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace Flx.Delivery.Application.Mappings
         {
             CreateMap<Microservices.Commands.RegistrateUserCommand.Command, UserEntity>()
                 .ForMember(dest => dest.PasswordHash,
-                    opts => opts.MapFrom(src => src.Password));
+                    opts => opts.MapFrom(src => src.Password))
+                .ForMember(dest => dest.Roles,
+                    opts => opts.MapFrom(src => new RoleType[] { RoleType.User }));
         }
     }
 }

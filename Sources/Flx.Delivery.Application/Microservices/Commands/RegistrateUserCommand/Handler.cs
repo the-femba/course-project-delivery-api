@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Flx.Delivery.Application.Exceptions;
 using Flx.Delivery.Domain.Entities;
+using Flx.Delivery.Domain.Enums;
 using MediatR;
 using Rovecode.Lotos.Repositories;
 using System;

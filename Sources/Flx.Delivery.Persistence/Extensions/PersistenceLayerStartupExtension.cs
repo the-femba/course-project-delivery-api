@@ -2,8 +2,8 @@
 using System.Reflection;
 using AutoMapper;
 using FluentValidation;
-using Flx.Delivery.Application.Interfaces.Services;
-using Flx.Delivery.Persistence.Services;
+using Flx.Delivery.Application.Interfaces.Repositories;
+using Flx.Delivery.Persistence.Repositories;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Rovecode.Lotos.Extensions;
@@ -18,12 +18,12 @@ namespace Flx.Delivery.Persistence.Extensions
 
             services.AddLotos(currentAssembly);
 
-            services.InitServices();
+            services.InitRepositories();
         }
 
-        private static void InitServices(this IServiceCollection services)
+        private static void InitRepositories(this IServiceCollection services)
         {
-            services.AddTransient<IExampleService, ExampleService>();
+            services.AddSingleton<IUserEntityRepository, UserEntityRepository>();
         }
     }
 }
