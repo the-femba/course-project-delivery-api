@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  web_api:
+    build: .
+    container_name: flx_project_name_api
+    ports:
+      - "8080:80"
+    depends_on:
+      - mongo_db
+    volumes:
+      - cache/storage:/app/cache/storage
+  mongo_db:
+    image: mongo:latest
+    container_name: flx_project_name_database
+    ports:
+      - "27017:27017"
+    volumes:
+      - cache/database:/data/db
