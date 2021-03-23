@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Flx.Delivery.Application.Exceptions;
+using Flx.Delivery.Application.Utils;
 using Flx.Delivery.Domain.Entities;
 using Flx.Delivery.Domain.Enums;
 using MediatR;
@@ -31,6 +32,8 @@ namespace Flx.Delivery.Application.Microservices.Commands.RegistrateUserCommand
             if (!exists)
             {
                 var userEntity = _mapper.Map<UserEntity>(request);
+
+                userEntity.PasswordHash = StringUtil.GetHashString(userEntity.PasswordHash);
 
                 await _userStorage.Put(userEntity);
 
