@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using AutoMapper;
-using FluentValidation;
-using Flx.Delivery.Application.Interfaces.Accessors;
+﻿using Flx.Delivery.Application.Interfaces.Accessors;
 using Flx.Delivery.Identity.Accessors;
 using Flx.Delivery.Identity.Pipelines;
 using MediatR;

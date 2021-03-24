@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentValidation;
+﻿using FluentValidation;
 using Flx.Delivery.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using System.Collections.Generic;
 
 namespace Flx.Delivery.WebApi.Filters
 {
@@ -32,12 +32,13 @@ namespace Flx.Delivery.WebApi.Filters
 
         private IActionResult ExceptionToResult(Exception exception, int code)
         {
-            var json = new Dictionary<string, dynamic>();
-
-            json.Add("code", code);
-            json.Add("isError", "true");
-            json.Add("errorType", exception.GetType().Name);
-            json.Add("errorMessage", exception.Message);
+            var json = new Dictionary<string, dynamic>
+            {
+                { "code", code },
+                { "isError", "true" },
+                { "errorType", exception.GetType().Name },
+                { "errorMessage", exception.Message }
+            };
             // json.Add("stackTrace", exception.StackTrace);
 
             var result = new JsonResult(json)

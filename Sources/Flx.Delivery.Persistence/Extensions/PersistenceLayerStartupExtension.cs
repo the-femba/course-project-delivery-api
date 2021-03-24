@@ -1,10 +1,5 @@
-﻿using System;
-using System.Reflection;
-using AutoMapper;
-using FluentValidation;
-using Flx.Delivery.Application.Interfaces.Repositories;
+﻿using Flx.Delivery.Application.Interfaces.Repositories;
 using Flx.Delivery.Persistence.Repositories;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Rovecode.Lotos.Extensions;
 

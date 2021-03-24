@@ -1,12 +1,6 @@
 ﻿using Flx.Delivery.Application.Interfaces.Accessors;
-using Flx.Delivery.Domain.Entities;
 using Microsoft.AspNetCore.Http;
-using Rovecode.Lotos.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flx.Delivery.Identity.Accessors
 {

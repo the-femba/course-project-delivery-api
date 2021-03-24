@@ -3,10 +3,6 @@ using Flx.Delivery.Application.Utils;
 using Flx.Delivery.Domain.Entities;
 using MediatR;
 using Rovecode.Lotos.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,7 +41,10 @@ namespace Flx.Delivery.Application.Microservices.Commands.LoginUserCommand
                     Token = token.Token,
                 };
             }
-            else throw new NotExistsDeliveryException("user not exists");
+            else
+            {
+                throw new NotExistsDeliveryException("user not exists");
+            }
         }
     }
 }
