@@ -1,4 +1,5 @@
-﻿using Flx.Delivery.Domain.Enums;
+﻿using Flx.Delivery.Application.Enums;
+using Flx.Delivery.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Flx.Delivery.Application.Attributes
 {
     public sealed class AuthAttribute : Attribute
     {
-        public IReadOnlyList<RoleType>? Roles { get; }
+        public IEnumerable<RoleType>? Roles { get; }
+        public RoleCheckStrategy CheckStrategy { get; set; } = RoleCheckStrategy.OneMatch;
 
         public AuthAttribute()
         {

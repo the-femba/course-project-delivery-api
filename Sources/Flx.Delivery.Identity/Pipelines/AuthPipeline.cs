@@ -1,4 +1,5 @@
 ﻿using Flx.Delivery.Application.Attributes;
+using Flx.Delivery.Application.Enums;
 using Flx.Delivery.Application.Exceptions;
 using Flx.Delivery.Application.Interfaces.Accessors;
 using Flx.Delivery.Application.Interfaces.Repositories;
@@ -41,7 +42,7 @@ namespace Flx.Delivery.Identity.Pipelines
 
                 if (authAttribute.Roles?.Count() > 0)
                 {
-                    if (await UserHasAllRoles(_authAccessor.AccessToken!, authAttribute.Roles!))
+                    if (!await CheckRolesWithStrategy(_authAccessor.AccessToken!, authAttribute.Roles!, authAttribute.CheckStrategy))
                     {
                         throw new AuthDeliveryException();
                     }
@@ -60,6 +61,20 @@ namespace Flx.Delivery.Identity.Pipelines
             }
         }
 
+        public Task<bool> CheckRolesWithStrategy(string token, IEnumerable<RoleType> roles, RoleCheckStrategy checkStrategy)
+        {
+            switch (checkStrategy)
+            {
+                case RoleCheckStrategy.AllMatch:
+                    return UserHasAllRoles(token, roles);
+                case RoleCheckStrategy.OneMatch:
+                    return UserHasOneRoles(token, roles);
+                default:
+                    // TODO: Add moddern ex
+                    throw new NotImplementedException();
+            }
+        }
+
         public async Task<bool> UserHasAllRoles(string token, IEnumerable<RoleType> roles)
         {
             var user = (await _userStorage.PickViaAccessToken(token))!;
@@ -73,6 +88,21 @@ namespace Flx.Delivery.Identity.Pipelines
             }
 
             return true;
+        }
+
+        public async Task<bool> UserHasOneRoles(string token, IEnumerable<RoleType> roles)
+        {
+            var user = (await _userStorage.PickViaAccessToken(token))!;
+
+            foreach (RoleType item in roles)
+            {
+                if (user.IsHasRole(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
