@@ -35,7 +35,6 @@ namespace Flx.Delivery.WebApi.Filters
             var json = new Dictionary<string, dynamic>
             {
                 { "code", code },
-                { "isError", "true" },
                 { "errorType", exception.GetType().Name },
                 { "errorMessage", exception.Message }
             };
