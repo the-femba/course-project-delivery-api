@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Flx.Delivery.Application.Microservices.Queries.GetCurrentUserInformationQuery
 {
-    [Auth(RoleType.User, RoleType.Admin, CheckStrategy = RoleCheckStrategy.OneMatch)]
+    [Auth]
     public class Query : IRequest<Result>
     {
 
