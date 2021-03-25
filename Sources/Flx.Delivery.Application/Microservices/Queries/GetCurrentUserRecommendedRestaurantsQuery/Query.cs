@@ -1,4 +1,5 @@
 ﻿using Flx.Delivery.Application.Attributes;
+using Flx.Delivery.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
