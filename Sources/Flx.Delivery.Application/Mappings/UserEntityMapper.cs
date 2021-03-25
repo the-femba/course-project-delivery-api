@@ -4,7 +4,7 @@ using Flx.Delivery.Domain.Enums;
 
 namespace Flx.Delivery.Application.Mappings
 {
-    private sealed class UserEntityMapper : Profile
+    internal sealed class UserEntityMapper : Profile
     {
         public UserEntityMapper()
         {
