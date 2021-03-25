@@ -26,7 +26,11 @@ namespace Flx.Delivery.Application.Pipelines
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _logger.LogInformation($"Invoke Method {request.GetType().Namespace} from {_httpContextAccessor.HttpContext.Connection.RemoteIpAddress} ip with token {_authAccessor.AccessToken ?? "none"}");
+            var msName = request.GetType().Namespace;
+            var ipAddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress;
+            var token = _authAccessor.AccessToken ?? "none";
+
+            _logger.LogInformation($"Invoke Microservice with name \'{msName}\' from \'{ipAddress}\' ip with token \'{token}\'");
 
             return await next();
         }
