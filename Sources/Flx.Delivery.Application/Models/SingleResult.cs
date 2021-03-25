@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flx.Delivery.Application.Models
 {
-    public sealed class OneResult<T>
+    public sealed class SingleResult<T>
     {
         public T? Result { get; set; }
     }
