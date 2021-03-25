@@ -47,7 +47,7 @@ namespace Flx.Delivery.Application.Microservices.Queries.GetRestaurantInformatio
         {
             if (!await _restaurantStorage.Exists(restaurantId))
             {
-                throw new NotExistsDeliveryException($"restaurant with id \'{restaurantId}\' not exists");
+                throw new NotExistsDeliveryException($"Restaurant with id \'{restaurantId}\' not exists");
             }
         }
     }
