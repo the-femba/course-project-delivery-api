@@ -31,7 +31,7 @@ namespace Flx.Delivery.Application.Microservices.Commands.LoginUserCommand
                 var token = new AccessTokenEntity()
                 {
                     UserId = user!.Id,
-                    Token = StringUtil.GenerateString(),
+                    Token = StringUtil.GenerateStringCrypt(),
                 };
 
                 await _accessTokenStorage.Put(token);

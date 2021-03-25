@@ -7,18 +7,25 @@ namespace Flx.Delivery.Application.Utils
 {
     public static class StringUtil
     {
-        /// <summary>
-        /// Генирирует случайную строку
-        /// </summary>
-        /// <param name="mask">Маска, или выборка, по которой будет происходить генерациия</param>
-        /// <param name="length">Количество символов</param>
-        /// <param name="inRandom">Свой, или создать рандом</param>
-        /// <returns>Сгенерированная строка</returns>
-        public static string GenerateString(string mask = "", int length = 32, Random? inRandom = null)
+        public static string GenerateStringCrypt(int length = 32, Random? inRandom = null)
         {
             Random random = inRandom ?? new Random();
 
             return new string(Enumerable.Range(0, length).Select(n => (char)random.Next(32, 127)).ToArray());
+        }
+
+        public static string GenerateString(string mask = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM234567890", int length = 32, Random? inRandom = null)
+        {
+            Random random = inRandom ?? new Random();
+
+            string buffer = "";
+
+            for (int i = 0; i < length; i++)
+            {
+                buffer += mask[random.Next(0, mask.Length - 1)];
+            }
+
+            return buffer;
         }
 
         public static byte[] GetHash(string inputString)
