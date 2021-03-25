@@ -59,7 +59,7 @@ namespace Flx.Delivery.Application.Microservices.Commands.CreateRestaurantComman
             };
         }
 
-        public string BuildPhotoName(Guid restaurantId, string prefix)
+        private string BuildPhotoName(Guid restaurantId, string prefix)
         {
             return $"{prefix}-{restaurantId}-{StringUtil.GenerateString(length: 6)}.flximg";
         }
