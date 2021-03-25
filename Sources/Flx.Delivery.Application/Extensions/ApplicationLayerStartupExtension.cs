@@ -20,6 +20,7 @@ namespace Flx.Delivery.Application.Extensions
 
             services.AddMediatR(currentAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipeline<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(MicroserviceAutoLoggerPipeline<,>));
         }
     }
 }
