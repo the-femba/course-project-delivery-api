@@ -8,6 +8,11 @@ namespace Flx.Delivery.Domain.Enums
 {
     public enum OrderStatus
     {
-
+        Validation,
+        СourierGoesToRestaurant,
+        RestaurantPreparesFood,
+        СourierGoesToCustomer,
+        Done,
+        Cancel,
     }
 }
