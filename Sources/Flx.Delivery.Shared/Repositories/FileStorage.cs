@@ -17,7 +17,7 @@ namespace Flx.Delivery.Shared.Repositories
 
         private string GetPath(string container)
         {
-            return $"{Directory.GetCurrentDirectory()}/cache/storage/{container}";
+            return $"{Directory.GetCurrentDirectory()}/Cache/Storage/{container}";
         }
 
         public byte[]? GetBytes(string container, string fileName)
