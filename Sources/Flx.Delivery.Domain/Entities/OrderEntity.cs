@@ -16,9 +16,9 @@ namespace Flx.Delivery.Domain.Entities
 
         public Guid RestaurantId { get; set; }
 
-        public Guid СustomerId { get; set; }
+        public Guid CustomerId { get; set; }
 
-        public Guid CourierId { get; set; }
+        public Guid? CourierId { get; set; }
 
         public OrderStatus Status { get; set; }
 

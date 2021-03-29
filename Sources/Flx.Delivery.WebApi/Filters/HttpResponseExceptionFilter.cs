@@ -2,13 +2,22 @@
 using Flx.Delivery.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
 namespace Flx.Delivery.WebApi.Filters
 {
+
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {
+        private readonly ILogger<HttpResponseExceptionFilter> _logger;
+
+        public HttpResponseExceptionFilter(ILogger<HttpResponseExceptionFilter> logger)
+        {
+            _logger = logger;
+        }
+
         public int Order { get; } = int.MaxValue - 10;
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -38,7 +47,8 @@ namespace Flx.Delivery.WebApi.Filters
                 { "errorType", exception.GetType().Name },
                 { "errorMessage", exception.Message }
             };
-            // json.Add("stackTrace", exception.StackTrace);
+
+            _logger.LogError($"Handle error with type \'{json["errorType"]}\' and http code \'{json["code"]}\'");
 
             var result = new JsonResult(json)
             {

@@ -13,17 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0BF0C6E7-2872-4B6B-A43C-38882C09E292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.Domain", "Sources\Flx.Delivery.Domain\Flx.Delivery.Domain.csproj", "{CC560373-64BD-41D5-9EE0-5AA343C5D03A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Domain", "Sources\Flx.Delivery.Domain\Flx.Delivery.Domain.csproj", "{CC560373-64BD-41D5-9EE0-5AA343C5D03A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.Application", "Sources\Flx.Delivery.Application\Flx.Delivery.Application.csproj", "{279EE2F6-38A3-4F6B-AD85-48AAFC82545D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Application", "Sources\Flx.Delivery.Application\Flx.Delivery.Application.csproj", "{279EE2F6-38A3-4F6B-AD85-48AAFC82545D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.WebApi", "Sources\Flx.Delivery.WebApi\Flx.Delivery.WebApi.csproj", "{52B1CA9A-BA52-4BE4-A19A-970CF0CEBEFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.WebApi", "Sources\Flx.Delivery.WebApi\Flx.Delivery.WebApi.csproj", "{52B1CA9A-BA52-4BE4-A19A-970CF0CEBEFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.Persistence", "Sources\Flx.Delivery.Persistence\Flx.Delivery.Persistence.csproj", "{1DA738C3-B58D-4974-8A40-884D74CBCBBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Persistence", "Sources\Flx.Delivery.Persistence\Flx.Delivery.Persistence.csproj", "{1DA738C3-B58D-4974-8A40-884D74CBCBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.Identity", "Sources\Flx.Delivery.Identity\Flx.Delivery.Identity.csproj", "{09F3E1CD-A9CC-419C-83E6-3CACB0A0383D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Identity", "Sources\Flx.Delivery.Identity\Flx.Delivery.Identity.csproj", "{09F3E1CD-A9CC-419C-83E6-3CACB0A0383D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flx.Delivery.Shared", "Sources\Flx.Delivery.Shared\Flx.Delivery.Shared.csproj", "{8CFA877B-B7D9-48F4-9710-1C907AFA2166}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Shared", "Sources\Flx.Delivery.Shared\Flx.Delivery.Shared.csproj", "{8CFA877B-B7D9-48F4-9710-1C907AFA2166}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flx.Delivery.Application.Tests", "Flx.Delivery.Application.Tests\Flx.Delivery.Application.Tests.csproj", "{2A97159E-3B85-4765-AFED-F91A3F697A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,12 +57,13 @@ Global
 		{8CFA877B-B7D9-48F4-9710-1C907AFA2166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFA877B-B7D9-48F4-9710-1C907AFA2166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CFA877B-B7D9-48F4-9710-1C907AFA2166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A97159E-3B85-4765-AFED-F91A3F697A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A97159E-3B85-4765-AFED-F91A3F697A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A97159E-3B85-4765-AFED-F91A3F697A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A97159E-3B85-4765-AFED-F91A3F697A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7B827334-1DA8-415B-B91B-738B8E4C01C6}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F7F08713-857D-407B-8953-B1B88491F4A6} = {DCA82143-1895-4C9E-B74D-D31A9511FA13}
@@ -72,6 +75,10 @@ Global
 		{1DA738C3-B58D-4974-8A40-884D74CBCBBE} = {BABCC894-4523-47C7-87A9-2EE850187C73}
 		{09F3E1CD-A9CC-419C-83E6-3CACB0A0383D} = {BABCC894-4523-47C7-87A9-2EE850187C73}
 		{8CFA877B-B7D9-48F4-9710-1C907AFA2166} = {BABCC894-4523-47C7-87A9-2EE850187C73}
+		{2A97159E-3B85-4765-AFED-F91A3F697A5F} = {FCC799B3-2E2A-4697-AA2C-1B9D10806E91}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B827334-1DA8-415B-B91B-738B8E4C01C6}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
