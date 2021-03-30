@@ -35,7 +35,7 @@ namespace Flx.Delivery.Persistence.Services
         {
             _logger.LogInformation("Courier search service running.");
 
-            _timer = new Timer(async e => await DoRound(), null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            _timer = new Timer(async e => await DoRound(), null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
 
             return Task.CompletedTask;
         }
@@ -90,6 +90,7 @@ namespace Flx.Delivery.Persistence.Services
                 _logger.LogInformation($"Attach courier with id {currentCourier.Id} for order with id {order.Id}.");
 
                 couriers.Remove(currentCourier);
+                searchCourierOrders.RemoveAt(i);
             }
         }
 
