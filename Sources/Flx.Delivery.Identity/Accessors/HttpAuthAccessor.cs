@@ -1,6 +1,5 @@
 ﻿using Flx.Delivery.Application.Interfaces.Accessors;
 using Microsoft.AspNetCore.Http;
-using System;
 
 namespace Flx.Delivery.Identity.Accessors
 {

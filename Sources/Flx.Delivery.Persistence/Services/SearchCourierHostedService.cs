@@ -6,9 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Rovecode.Lotos.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,28 +44,32 @@ namespace Flx.Delivery.Persistence.Services
         {
             _logger.LogInformation("Round started.");
 
-            var searchCourierOrders = await _orderStorage.PickMany(e => e.Status == OrderStatus.SearchForCourier);
+            var searchCourierOrders = (await _orderStorage.PickMany(e => e.Status == OrderStatus.SearchForCourier)).ToList();
 
-            if (searchCourierOrders.Count() == 0)
+            if (searchCourierOrders.Count == 0)
             {
                 _logger.LogWarning("No orders.");
                 return;
             }
 
-            var couriers = (await _userStorage.PickMany(e => e.IsHasRole(RoleType.Courier))).ToList();
+            var couriers = (await _userStorage.PickMany(e => e.Roles.Contains(RoleType.Courier))).ToList();
 
-            foreach (var item in couriers)
+            for (int i = couriers.Count - 1; i >= 0; i--)
             {
-                var courierHasActualOrders = await _orderStorage.Exists(e => e.Status != OrderStatus.Done && e.Status != OrderStatus.Cancel);
+                var current = couriers[i];
+
+                var courierHasActualOrders = await _orderStorage.Exists(e => e.CourierId == current.Id && e.Status != OrderStatus.Done && e.Status != OrderStatus.Cancel);
 
                 if (courierHasActualOrders)
                 {
-                    couriers.Remove(item);
+                    couriers.RemoveAt(i);
                 }
             }
 
-            foreach (var item in searchCourierOrders)
+            for (int i = searchCourierOrders.Count - 1; i >= 0; i--)
             {
+                var order = searchCourierOrders[i];
+
                 if (couriers.Count == 0)
                 {
                     foreach (var logItem in searchCourierOrders)
@@ -80,12 +82,12 @@ namespace Flx.Delivery.Persistence.Services
 
                 var currentCourier = couriers.First();
 
-                item.CourierId = currentCourier.Id;
-                item.Status = OrderStatus.СourierGoesToRestaurant;
+                order.CourierId = currentCourier.Id;
+                order.Status = OrderStatus.СourierGoesToRestaurant;
 
-                await item.Push();
+                await order.Push();
 
-                _logger.LogInformation($"Attach courier with id {currentCourier.Id} for order with id {item.Id}.");
+                _logger.LogInformation($"Attach courier with id {currentCourier.Id} for order with id {order.Id}.");
 
                 couriers.Remove(currentCourier);
             }
