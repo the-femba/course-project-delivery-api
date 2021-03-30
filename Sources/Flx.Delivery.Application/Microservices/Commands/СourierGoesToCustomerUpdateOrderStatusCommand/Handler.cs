@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flx.Delivery.Application.Microservices.Commands.RestaurantHasStartedToPrepareOrderUpdateOrderStatusCommand
+namespace Flx.Delivery.Application.Microservices.Commands.CourierGoesToCustomerUpdateOrderStatusCommand
 {
     public sealed class Handler : IRequestHandler<Command, Unit>
     {
@@ -32,14 +32,17 @@ namespace Flx.Delivery.Application.Microservices.Commands.RestaurantHasStartedTo
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            var order = await _orderStorage.Pick(e => e.Id == request.OrderId && e.Status == OrderStatus.CourierCameToRestaurant);
+            string token = _authAccessor.AccessToken!;
+            UserEntity courierUser = (await _userEntityStorage.PickViaAccessToken(token))!;
+
+            var order = await _orderStorage.Pick(e => e.CourierId == courierUser.Id && e.Status == OrderStatus.RestaurantPreparesFood);
 
             if (order is null)
             {
-                throw new NotExistsDeliveryException($"order not exists or the order status does not match 'CourierCameToRestaurant'");
+                throw new NotExistsDeliveryException($"order not exists or the order status does not match 'RestaurantPreparesFood'");
             }
 
-            order.Status = OrderStatus.RestaurantPreparesFood;
+            order.Status = OrderStatus.CourierGoesToCustomer;
             await order.Push();
 
             return new();

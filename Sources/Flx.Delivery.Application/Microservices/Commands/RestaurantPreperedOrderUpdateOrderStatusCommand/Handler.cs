@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flx.Delivery.Application.Microservices.Commands.RestaurantHasStartedToPrepareOrderUpdateOrderStatusCommand
+namespace Flx.Delivery.Application.Microservices.Commands.RestaurantPreperedOrderUpdateOrderStatusCommand
 {
     public sealed class Handler : IRequestHandler<Command, Unit>
     {
@@ -32,14 +32,14 @@ namespace Flx.Delivery.Application.Microservices.Commands.RestaurantHasStartedTo
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            var order = await _orderStorage.Pick(e => e.Id == request.OrderId && e.Status == OrderStatus.CourierCameToRestaurant);
+            var order = await _orderStorage.Pick(e => e.Id == request.OrderId && e.Status == OrderStatus.RestaurantPreparesFood);
 
             if (order is null)
             {
-                throw new NotExistsDeliveryException($"order not exists or the order status does not match 'CourierCameToRestaurant'");
+                throw new NotExistsDeliveryException($"order not exists or the order status does not match 'RestaurantPreparesFood'");
             }
 
-            order.Status = OrderStatus.RestaurantPreparesFood;
+            order.Status = OrderStatus.RestaurantPreparedFood;
             await order.Push();
 
             return new();
