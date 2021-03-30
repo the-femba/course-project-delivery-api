@@ -3,6 +3,7 @@ using Flx.Delivery.Application.Utils;
 using Flx.Delivery.Domain.Entities;
 using MediatR;
 using Rovecode.Lotos.Repositories;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
