@@ -3,11 +3,11 @@
     public enum OrderStatus
     {
         SearchForCourier = 0,
-        СourierGoesToRestaurant = 1,
-        СourierCameToRestaurant = 2,
+        CourierGoesToRestaurant = 1,
+        CourierCameToRestaurant = 2,
         RestaurantPreparesFood = 3,
         RestaurantPreparedFood = 5,
-        СourierGoesToCustomer = 6,
+        CourierGoesToCustomer = 6,
         Done = -1,
         Cancel = -2,
     }

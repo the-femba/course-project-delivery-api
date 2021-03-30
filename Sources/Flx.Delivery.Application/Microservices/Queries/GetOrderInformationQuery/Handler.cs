@@ -2,7 +2,6 @@
 using Flx.Delivery.Application.Interfaces.Accessors;
 using Flx.Delivery.Application.Interfaces.Repositories;
 using Flx.Delivery.Domain.Entities;
-using Flx.Delivery.Domain.Enums;
 using MediatR;
 using Rovecode.Lotos.Repositories;
 using System;
@@ -12,9 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flx.Delivery.Application.Microservices.Commands.CourierCameToRestaurantUpdateOrderStatusCommand
+namespace Flx.Delivery.Application.Microservices.Queries.GetOrderInformationQuery
 {
-    public sealed class Handler : IRequestHandler<Command, Unit>
+    public sealed class Handler : IRequestHandler<Query, Result>
     {
         private readonly IStorage<OrderEntity> _orderStorage;
         private readonly IStorage<RestaurantEntity> _restaurantStorage;
@@ -25,35 +24,32 @@ namespace Flx.Delivery.Application.Microservices.Commands.CourierCameToRestauran
         {
             _userEntityStorage = userEntityStorage;
             _orderStorage = orderStorage;
-            _userEntityStorage = userEntityStorage;
             _restaurantStorage = restaurantStorage;
             _authAccessor = authAccessor;
         }
 
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(Query request, CancellationToken cancellationToken)
         {
             string token = _authAccessor.AccessToken!;
-            UserEntity courierUser = (await _userEntityStorage.PickViaAccessToken(token))!;
+            UserEntity user = (await _userEntityStorage.PickViaAccessToken(token))!;
 
-            var order = await _orderStorage.Pick(e => e.CourierId == courierUser.Id && e.Status == OrderStatus.CourierGoesToRestaurant);
+            var order = await _orderStorage.Pick(e => e.Id == request.OrderId);
 
-            if (order == null)
+            if (order is null)
             {
-                throw new NotExistsDeliveryException($"Courier has no order or the order status does not match 'CourierGoesToRestaurant'");
+                throw new NotExistsDeliveryException($"cant find order with id '{request.OrderId}'");
             }
 
-            order.Status = OrderStatus.CourierCameToRestaurant;
-            await order.Push();
-
-            return new();
-        }
-
-        private async Task ThrowIfOr(Guid restaurantId)
-        {
-            if (!await _restaurantStorage.Exists(restaurantId))
+            if (order.CourierId != user.Id && order.CustomerId != user.Id)
             {
-                throw new NotExistsDeliveryException($"restaurant with id \'{restaurantId}\' is not exists");
+                throw new AuthDeliveryException();
             }
+
+            return new()
+            {
+                FoodsIds = order.OrderFoodsIds,
+                RestaurantId = order.RestaurantId,
+            };
         }
     }
 }

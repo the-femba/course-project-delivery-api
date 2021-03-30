@@ -1,4 +1,5 @@
 ﻿using Flx.Delivery.Application.Attributes;
+using Flx.Delivery.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Flx.Delivery.Application.Microservices.Commands.CourierGaveOrderToCustomerUpdateOrderStatusCommand
 {
-    [Auth]
+    [Auth(RoleType.Courier)]
     public sealed class Command : IRequest<Unit>
     {
 

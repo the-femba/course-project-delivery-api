@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flx.Delivery.Application.Microservices.Commands.СourierGoesToCustomerUpdateOrderStatusCommand
+namespace Flx.Delivery.Application.Microservices.Commands.CourierGoesToCustomerUpdateOrderStatusCommand
 {
     [Auth(RoleType.Courier)]
     public sealed class Command : IRequest<Unit>

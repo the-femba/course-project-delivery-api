@@ -46,6 +46,24 @@ namespace Flx.Delivery.Persistence.Services
 
             var searchCourierOrders = (await _orderStorage.PickMany(e => e.Status == OrderStatus.SearchForCourier)).ToList();
 
+            // delete old orders
+            for (int i = searchCourierOrders.Count - 1; i >= 0; i--)
+            {
+                var order = searchCourierOrders[i];
+                var currentDate = DateTime.UtcNow;
+                var createDate = order.CreateDate.AddMinutes(1);
+
+                if (currentDate > createDate)
+                {
+                    _logger.LogError($"Cant find courier for order with id '{order.Id}'");
+
+                    order.Status = OrderStatus.Cancel;
+                    await order.Push();
+
+                    searchCourierOrders.RemoveAt(i);
+                }
+            }
+
             if (searchCourierOrders.Count == 0)
             {
                 _logger.LogWarning("No orders.");
@@ -54,6 +72,7 @@ namespace Flx.Delivery.Persistence.Services
 
             var couriers = (await _userStorage.PickMany(e => e.Roles.Contains(RoleType.Courier))).ToList();
 
+            // remove couriers with actual order
             for (int i = couriers.Count - 1; i >= 0; i--)
             {
                 var current = couriers[i];
@@ -66,6 +85,7 @@ namespace Flx.Delivery.Persistence.Services
                 }
             }
 
+            // attach couriers to orders
             for (int i = searchCourierOrders.Count - 1; i >= 0; i--)
             {
                 var order = searchCourierOrders[i];
@@ -83,7 +103,7 @@ namespace Flx.Delivery.Persistence.Services
                 var currentCourier = couriers.First();
 
                 order.CourierId = currentCourier.Id;
-                order.Status = OrderStatus.СourierGoesToRestaurant;
+                order.Status = OrderStatus.CourierGoesToRestaurant;
 
                 await order.Push();
 
