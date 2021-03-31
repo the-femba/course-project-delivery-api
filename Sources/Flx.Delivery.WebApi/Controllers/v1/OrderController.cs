@@ -85,17 +85,23 @@ namespace Flx.Delivery.WebApi.Controllers.v1
         }
 
         [HttpGet("getOrderInformation")]
-        public async Task<IActionResult> GetOrderInformationQuery()
+        public async Task<IActionResult> GetOrderInformationQuery([FromQuery] Guid orderId)
         {
-            var query = new Application.Microservices.Queries.GetOrderInformationQuery.Query();
+            var query = new Application.Microservices.Queries.GetOrderInformationQuery.Query()
+            {
+                OrderId = orderId,
+            };
 
             return Ok(await _mediator.Send(query));
         }
 
         [HttpGet("getOrderStatusQuery")]
-        public async Task<IActionResult> GetOrderStatusQuery()
+        public async Task<IActionResult> GetOrderStatusQuery([FromQuery] Guid orderId)
         {
-            var query = new Application.Microservices.Queries.GetOrderStatusQuery.Query();
+            var query = new Application.Microservices.Queries.GetOrderStatusQuery.Query()
+            {
+                OrderId = orderId,
+            };
 
             return Ok(await _mediator.Send(query));
         }

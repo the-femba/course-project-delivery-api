@@ -35,7 +35,7 @@ namespace Flx.Delivery.Application.Microservices.Commands.CourierGoesToCustomerU
             string token = _authAccessor.AccessToken!;
             UserEntity courierUser = (await _userEntityStorage.PickViaAccessToken(token))!;
 
-            var order = await _orderStorage.Pick(e => e.CourierId == courierUser.Id && e.Status == OrderStatus.RestaurantPreparesFood);
+            var order = await _orderStorage.Pick(e => e.CourierId == courierUser.Id && e.Status == OrderStatus.RestaurantPreparedFood);
 
             if (order is null)
             {
