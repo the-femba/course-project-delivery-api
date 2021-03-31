@@ -20,6 +20,11 @@ namespace Flx.Delivery.Identity.Accessors
 
         private string? GetAccessToken()
         {
+            if (_httpContextAccessor.HttpContext is null)
+            {
+                return null;
+            }
+
             if (!_httpContextAccessor.HttpContext.Request.Headers.ContainsKey("Authorization"))
             {
                 return null;

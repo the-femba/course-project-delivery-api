@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using Flx.Delivery.Application.Pipelines;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rovecode.Lotos.Extensions;
+using System.Threading.Tasks;
 
 namespace Flx.Delivery.Application.Extensions
 {

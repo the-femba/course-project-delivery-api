@@ -22,5 +22,11 @@ namespace Flx.Delivery.WebApi.Controllers.v1
 
             return Ok(await _mediator.Send(query));
         }
+
+        [HttpPost("permit")]
+        public async Task<IActionResult> GetPermitUser([FromBody] Application.Microservices.Commands.PermitUserCommand.Command command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
     }
 }

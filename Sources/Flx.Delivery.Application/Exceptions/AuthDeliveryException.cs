@@ -2,7 +2,7 @@
 {
     public sealed class AuthDeliveryException : DeliveryException
     {
-        public AuthDeliveryException() : base("Unauth")
+        public AuthDeliveryException() : base("Unauth", 401)
         {
 
         }
