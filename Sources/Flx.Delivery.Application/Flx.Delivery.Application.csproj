@@ -9,8 +9,6 @@
 
 	<ItemGroup>
 		<Folder Include="Extensions\" />
-		<Folder Include="Microservices\Queries\GetOrderInformationQuery\" />
-		<Folder Include="Microservices\Queries\GetOrderStatusQuery\" />
 		<Folder Include="Utils\" />
 	</ItemGroup>
 	<ItemGroup>

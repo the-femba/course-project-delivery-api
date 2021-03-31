@@ -1,4 +1,5 @@
 ﻿using Flx.Delivery.Application.Attributes;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Flx.Delivery.Application.Microservices.Queries.GetOrderInformationQuery
 {
     [Auth]
-    public sealed class Query
+    public sealed class Query : IRequest<Result>
     {
         public Guid OrderId { get; set; }
     }
