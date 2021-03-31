@@ -1,13 +1,8 @@
-﻿using Flx.Delivery.Application.Exceptions;
-using Flx.Delivery.Application.Interfaces.Accessors;
+﻿using Flx.Delivery.Application.Interfaces.Accessors;
 using Flx.Delivery.Application.Interfaces.Repositories;
 using Flx.Delivery.Domain.Entities;
 using MediatR;
 using Rovecode.Lotos.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

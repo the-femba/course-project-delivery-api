@@ -1,7 +1,6 @@
 ﻿using Flx.Delivery.Application.Interfaces.Repositories;
 using Flx.Delivery.Persistence.Repositories;
 using Flx.Delivery.Persistence.Services;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Rovecode.Lotos.Extensions;
 

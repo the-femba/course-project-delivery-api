@@ -5,10 +5,6 @@ using Flx.Delivery.Domain.Entities;
 using Flx.Delivery.Domain.Enums;
 using MediatR;
 using Rovecode.Lotos.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
